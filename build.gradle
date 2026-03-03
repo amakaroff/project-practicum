@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'checkstyle'
+    id 'com.diffplug.spotless' version '8.3.0'
 }
 
 group = 'ru.tbank.practicum'
@@ -24,14 +24,11 @@ test {
     useJUnitPlatform()
 }
 
-// ----- Checkstyle -----
+// ----- Linter -----
 
-checkstyle {
-    toolVersion = '12.3.1'
-    configFile = rootProject.file('config/checkstyle/checkstyle.xml')
-    configProperties = [
-            'basedir': rootDir.path
-    ]
-    ignoreFailures = false
-    showViolations = true
+spotless {
+    java {
+        palantirJavaFormat().formatJavadoc(true)
+    }
 }
+
